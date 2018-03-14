@@ -1,0 +1,17 @@
+#!/usr/bin/with-contenv bash
+
+DISABLEBLUETOOTH="${DISABLEBLUETOOTH:-false}";
+[[ "${DISABLEBLUETOOTH}" != "false" ]] && (
+	echo "Not starting Bluetooth Daemon";
+	mv /etc/services.d/bluetooth /defaults/;
+);
+
+echo "Creating user pulse";
+adduser -u ${PUID} -h /var/run/pulse -D pulse 
+&& addgroup pulse-access \
+&& addgroup pulse pulse-access \
+&& addgroup pulse audio \
+&& addgroup pulse video \
+&& addgroup pulse lp 
+
+echo "Done.";

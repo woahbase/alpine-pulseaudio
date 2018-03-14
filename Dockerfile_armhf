@@ -1,0 +1,28 @@
+ARG ARCH=frommakefile
+ARG DOCKERSRC=frommakefile
+ARG USERNAME=frommakefile
+#
+FROM ${USERNAME}/${DOCKERSRC}:${ARCH}
+#
+ARG PUID=1001
+ARG PGID=1001
+#
+RUN set -xe \
+    && echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
+    && echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
+    && apk add --no-cache --purge -uU curl \
+        bluez bluez-libs bluez-firmware \
+        alsa-lib alsa-utils \
+	libdaemon popt soxr libconfig avahi python3 mpg123 \
+        pulseaudio pulseaudio-dev pulseaudio-zeroconf pulseaudio-system pulseaudio-utils pulseaudio-alsa pulseaudio-bluez pulseaudio-libs \
+    && curl -o /usr/local/bin/pulsemixer -jkSL https://raw.githubusercontent.com/GeorgeFilipkin/pulsemixer/master/pulsemixer \
+    && chmod +x /usr/local/bin/pulsemixer \
+    && rm -rf /var/cache/apk/* /tmp/* 
+#
+COPY root/ /
+#
+# VOLUME /var/run/pulse/
+#
+EXPOSE 4713
+#
+ENTRYPOINT ["/init"]

@@ -1,0 +1,7 @@
+#!/usr/bin/with-contenv bash
+
+rm -rf /tmp/pulse-* ~/.pulse/*-runtime
+
+/usr/bin/pulseaudio --log-level=1 --log-target=stderr --disallow-exit=true --exit-idle-time=180 -vvvv
+# /usr/bin/pulseaudio --system --log-level=1 --log-target=stderr --disallow-exit=true --exit-idle-time=180 -vvvv
+# s6-setuidgid $PUID:$PGID /usr/bin/pulseaudio --daemonize=no --log-level=1 --log-target=stderr --disallow-exit=true --exit-idle-time=180 --start -vvvv
