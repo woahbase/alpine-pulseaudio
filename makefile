@@ -54,7 +54,7 @@ RUNFLAGS   := -c 256 -m 256m \
 	--device /dev/snd \
 	--net=host \
 	--device /dev/bus/usb
-#	-e DISABLEBLUETOOTH=false 
+#	-e DISABLEBLUETOOTH=false
 
 # -- }}}
 
