@@ -7,7 +7,7 @@ DISABLEBLUETOOTH="${DISABLEBLUETOOTH:-false}";
 );
 
 echo "Creating user pulse";
-adduser -u ${PUID} -h /var/run/pulse -D pulse 
+adduser -u ${PUID} -h /var/run/pulse -D pulse \
 && addgroup pulse-access \
 && addgroup pulse pulse-access \
 && addgroup pulse audio \
