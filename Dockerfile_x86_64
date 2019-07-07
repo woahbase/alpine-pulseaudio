@@ -1,8 +1,6 @@
-ARG ARCH=frommakefile
 ARG DOCKERSRC=frommakefile
-ARG USERNAME=frommakefile
 #
-FROM ${USERNAME}/${DOCKERSRC}:${ARCH}
+FROM ${DOCKERSRC}
 #
 ARG PUID=1001
 ARG PGID=1001
@@ -15,7 +13,7 @@ RUN set -xe \
         bluez bluez-libs bluez-firmware \
         alsa-lib alsa-utils \
 	libdaemon popt soxr libconfig avahi python3 mpg123 expect libressl2.7-libcrypto \
-        pulseaudio pulseaudio-dev pulseaudio-zeroconf pulseaudio-system pulseaudio-utils pulseaudio-alsa pulseaudio-bluez pulseaudio-libs \
+        pulseaudio pulseaudio-dev pulseaudio-zeroconf pulseaudio-utils pulseaudio-alsa pulseaudio-bluez pulseaudio-jack \
     && curl -o /usr/local/bin/pulsemixer -jkSL https://raw.githubusercontent.com/GeorgeFilipkin/pulsemixer/master/pulsemixer \
     && chmod +x /usr/local/bin/pulsemixer \
     && rm -rf /var/cache/apk/* /tmp/*

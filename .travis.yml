@@ -8,13 +8,14 @@ env:
   matrix:
   - ARCH=x86_64 PUID=1000 PGID=1000
   - ARCH=armhf PUID=1001 PGID=1001
-  global:
-install: true
+  - ARCH=armv7l PUID=1001 PGID=1001
+  - ARCH=aarch64 PUID=1001 PGID=1001
 before_script:
+- uname -a
 - docker --version
 - make --version
 script:
-- make ARCH=${ARCH} PUID=${PUID} PGID=${PGID} build test
+- make ARCH=${ARCH} BUILD_NUMBER=${TRAVIS_BUILD_NUMBER} BRANCH=${TRAVIS_BRANCH} build test
 after_success:
 - docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
 - make ARCH=${ARCH} push
