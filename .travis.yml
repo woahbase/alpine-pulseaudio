@@ -15,7 +15,7 @@ before_script:
 - docker --version
 - make --version
 script:
-- make ARCH=${ARCH} BUILD_NUMBER=${TRAVIS_BUILD_NUMBER} BRANCH=${TRAVIS_BRANCH} build test
+- make ARCH=${ARCH} PUID=${PUID} PGID=${PGID} BUILD_NUMBER=${TRAVIS_BUILD_NUMBER} BRANCH=${TRAVIS_BRANCH} build test
 after_success:
 - docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
 - make ARCH=${ARCH} push
